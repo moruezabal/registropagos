@@ -1,5 +1,5 @@
 <?php
-   
+   require_once'lib/payments.php';
 
     // definimos la base url de forma dinamica
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -16,8 +16,12 @@
 
     // decide que camino tomar según TABLA DE RUTEO
     switch ($parametros[0]) {
-        case 'verpagos': // /listar   ->   showTasks()
+        case 'verpagos': 
             showPayments();
+        break;
+
+        case 'hola': 
+            saludar();
         break;
 
         default: 
