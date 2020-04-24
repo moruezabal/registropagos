@@ -16,12 +16,18 @@
 
     // decide que camino tomar según TABLA DE RUTEO
     switch ($parametros[0]) {
-        case 'verpagos': 
+        case 'verpagos': //Muestra Lista de todos los pagos y el formulario
             showPayments();
         break;
 
-        case 'hola': 
-            saludar();
+        case 'agregar': // Agrega un pago generado mediante script
+            if (count($parametros) == 5){
+                addPayment($parametros[1],$parametros[2],$parametros[3],$parametros[4]);
+            }
+        break;
+
+        case 'nuevo': // Agrega un pago desde el formulario
+            newPayment();
         break;
 
         default: 

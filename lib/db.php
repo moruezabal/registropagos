@@ -12,3 +12,13 @@ $tareas = $sentencia->fetchAll(PDO::FETCH_OBJ); // obtiene la respuesta
 
 return $tareas;
 }
+
+function insertPayment($deudor, $cuota, $cuota_capital, $fecha_pago) {
+    // 1. abro la conexión con MySQL 
+    $db = new PDO('mysql:host=localhost;'.'dbname=registro_deudas;charset=utf8', 'root', '');
+
+    // 2. enviamos la consulta
+   $sentencia = $db->prepare("INSERT INTO pagos(deudor, cuota, cuota_capital, fecha_pago) VALUES(?, ?, ?, ?)"); // prepara la consulta
+   $sentencia->execute([$deudor, $cuota, $cuota_capital, $fecha_pago]); // ejecuta
+
+}
