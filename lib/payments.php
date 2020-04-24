@@ -19,70 +19,74 @@
     Aquí se verá la lista de pagos
     */
     function showPayments(){
+    echo('<div class="row" style="width:1000px">');
+        echo ("<div class='col-6'>");
+            echo("<h1>Todos los pagos</h1>");
 
-        echo ("<div class='pagos'>");
-        echo("<h1>Todos los pagos</h1>");
+            $payments = getPayments();
 
-        $payments = getPayments();
+            // arma la tabla con la información de la base de datos
+            echo "<table class='table' style='width:450px'";
+            echo "<tr><th scope='col'>Deudor</th><th scope='col'>Cuota</th><th scope='col'>Monto</th><th scope='col'>Fecha de Pago</th></tr>";
 
-        // arma la tabla con la información de la base de datos
-        echo "<table class='table' style='width:450px'";
-        echo "<tr><th scope='col'>Deudor</th><th scope='col'>Cuota</th><th scope='col'>Monto</th><th scope='col'>Fecha de Pago</th></tr>";
-
-        foreach ($payments as $payment) {
-            echo "<tr><td>" . $payment->deudor . "</td><td>" . $payment->cuota ."</td><td>" . $payment->cuota_capital . "</td><td>" . $payment->fecha_pago . "</td></tr>";
-        }
-        echo("</table>");
+            foreach ($payments as $payment) {
+                echo "<tr><td>" . $payment->deudor . "</td><td>" . $payment->cuota ."</td><td>" . $payment->cuota_capital . "</td><td>" . $payment->fecha_pago . "</td></tr>";
+            }
+            echo("</table>");
         echo("</div>");
+  
+        echo ("<div class='col-6'>");
+            echo('<form action="nuevo" method="post" class="my-4">
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-group">
+                        <label>Deudor</label>
+                        <input name="deudor" type="text" class="form-control">
+                    </div>
+                </div>
 
-        echo('<form action="nuevo" method="post" class="my-4">
-        <div class="row">
-            <div class="col-9">
-                <div class="form-group">
-                    <label>Deudor</label>
-                    <input name="deudor" type="text" class="form-control">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Cuota</label>
+                        <select name="cuota" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>     
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-3">
-                <div class="form-group">
-                    <label>Cuota</label>
-                    <select name="cuota" class="form-control">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>     
-                    </select>
+            <div class="row">
+                
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Monto</label>
+                        <input name="monto" type="number" class="form-control">
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row">
-            
-            <div class="col-6">
-                <div class="form-group">
-                    <label>Monto</label>
-                    <input name="monto" type="number" class="form-control">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Fecha de pago</label>
+                        <input name="fecha_pago" type="date" class="form-control">
+                    </div>
                 </div>
             </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>');
+        echo("</div>");
+    echo('</div>');
 
-            <div class="col-6">
-                <div class="form-group">
-                    <label>Fecha de pago</label>
-                    <input name="fecha_pago" type="text" class="form-control">
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>');
     }
     //Pago agregado desde script
     function addPayment($deudor, $cuota, $cuota_capital, $fecha_pago){
