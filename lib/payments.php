@@ -107,9 +107,16 @@
         // verifica los datos obligatorios
         if (!empty($deudor) && !empty($cuota) && !empty($monto) && !empty($fechaPago)) {
 
-            // inserta en la DB y redirige
-            insertPayment($deudor, $cuota, $monto, $fechaPago);
-            header('Location: ' . BASE_URL . "verpagos");
+            $unico = isUnique($deudor, $cuota); // Pregunta en la DB si hay registros  c/ esos parametros
+            if ($unico){ // Booleano que te indica si es el único registro de ese tipo
+                // inserta en la DB y redirige
+                insertPayment($deudor, $cuota, $monto, $fechaPago);
+                header('Location: ' . BASE_URL . "verpagos");
+                
+            } else{
+                echo "<h2>ERROR! Cuota ya ingresada</h2>";
+             }
+
         } else {
             echo "<h2>ERROR! Faltan datos obligatorios</h2>";
         }
